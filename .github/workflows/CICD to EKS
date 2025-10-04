@@ -28,19 +28,19 @@ jobs:
 
       - name: Build and Push Vote Service
         run: |
-          IMAGE_URI=${{ steps.login-ecr.outputs.registry }}/vote:latest
+          IMAGE_URI=${{ steps.login-ecr.outputs.registry }}/ajay-ecr:latest
           docker build -t $IMAGE_URI ./vote
           docker push $IMAGE_URI
 
       - name: Build and Push Result Service
         run: |
-          IMAGE_URI=${{ steps.login-ecr.outputs.registry }}/result:latest
+          IMAGE_URI=${{ steps.login-ecr.outputs.registry }}/ajay-ecr:latest
           docker build -t $IMAGE_URI ./result
           docker push $IMAGE_URI
 
       - name: Build and Push Worker Service
         run: |
-          IMAGE_URI=${{ steps.login-ecr.outputs.registry }}/worker:latest
+          IMAGE_URI=${{ steps.login-ecr.outputs.registry }}/ajay-ecr:latest
           docker build -t $IMAGE_URI ./worker
           docker push $IMAGE_URI
 
