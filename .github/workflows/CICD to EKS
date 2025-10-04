@@ -47,5 +47,5 @@ jobs:
 
       - name: Update Kubernetes Deployment
         run: |
-          aws eks update-kubeconfig --name my-eks-cluster --region <your-region>
+          aws eks update-kubeconfig --name ajay-eks-test --region us-east-1
           kubectl apply -f k8s-specifications/*
