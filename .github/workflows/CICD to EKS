@@ -26,24 +26,13 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Build and Push Vote Service
+      - name: Build and Push Docker Images
         run: |
-          IMAGE_URI=${{ steps.login-ecr.outputs.registry }}/ajay-ecr:latest
-          docker build -t $IMAGE_URI ./vote
+          for service in vote result worker; do
+          IMAGE_URI=131676643044.dkr.ecr.us-east-1.amazonaws.com/ajay-ecr:$service-latest
+          docker build -t $IMAGE_URI ./$service
           docker push $IMAGE_URI
-
-      - name: Build and Push Result Service
-        run: |
-          IMAGE_URI=${{ steps.login-ecr.outputs.registry }}/ajay-ecr:latest
-          docker build -t $IMAGE_URI ./result
-          docker push $IMAGE_URI
-
-      - name: Build and Push Worker Service
-        run: |
-          IMAGE_URI=${{ steps.login-ecr.outputs.registry }}/ajay-ecr:latest
-          docker build -t $IMAGE_URI ./worker
-          docker push $IMAGE_URI
-
+        done
 
       - name: Update Kubernetes Deployment
         run: |
